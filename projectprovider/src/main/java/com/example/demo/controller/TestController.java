@@ -17,6 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @GetMapping("/")
     public String getResult(){
-        return  "提供者喜喜";
+        return  "提供者喜喜x";
     }
 }
