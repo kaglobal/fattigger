@@ -1,0 +1,40 @@
+server:
+  port: 8762
+spring:
+  application:
+    name: service-consummer
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/bsmmdb?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone = GMT
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+     cache: false
+     prefix: classpath:/templates/
+     suffix: .html
+     encoding: UTF-8
+     mode: HTML5
+  resource:
+    chain:
+      strategy:
+      content:
+        enable: true
+        paths: /**
+  mvc:
+    static-path-pattern: /static/**
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 15  # 发呆时间，即服务续约到期时间（缺省为90s）
+  client:
+    registry-fetch-interval-seconds: 10 # 拉取服务注册信息间隔（缺省为30s）
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true # 开启健康检查（依赖spring-boot-starter-actuator）
+feign:
+  hystrix:
+    enabled: true
+
+
+

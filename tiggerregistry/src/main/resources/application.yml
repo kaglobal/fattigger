@@ -1,0 +1,24 @@
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/bsmmdb?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone = GMT
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  登录用户名密码
+#  security:
+#    user:
+#      name: root
+#      password: root
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+  server:
+    enable-self-preservation: false      # 关闭自我保护模式（默认为打开）
+    eviction-interval-timer-in-ms: 5000  # 续期时间，即扫描失效服务的间隔时间（缺省为60*1000ms）
+  client:
+    register-with-eureka: false #默认设置下，该服务注册中心也会将自己作为客户端来尝试注册它自己，所以我们需要禁用它的客户端注册行为
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
