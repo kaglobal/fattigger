@@ -3,11 +3,17 @@ server:
 spring:
   application:
     name: service-provider
-  datasource:
-    url: jdbc:mysql://localhost:3306/bsmmdb?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone = GMT
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: dev
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.bsmm.demo.model
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug
 eureka:
   instance:
     lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s）

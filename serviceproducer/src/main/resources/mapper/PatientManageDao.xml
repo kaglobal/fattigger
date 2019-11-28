@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace= "com.tigger.serviceprovder.dao.PatientManageDao" >
+    <resultMap id="BaseResultMap" type="com.tigger.serviceprovder.model.pojo.Patient">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="bsmm_patientName" jdbcType="VARCHAR" property="patientName" />
+        <result column="bsmm_patientSex" jdbcType="VARCHAR" property="patientSex" />
+        <result column="bsmm_patientAge" jdbcType="VARCHAR" property="patientAge" />
+        <result column="bsmm_patientAddress" jdbcType="VARCHAR" property="patientAddress" />
+        <result column="bsmm_patientPhone" jdbcType="VARCHAR" property="patientPhone" />
+        <result column="bsmm_contactName" jdbcType="VARCHAR" property="contactName" />
+        <result column="bsmm_contactAddress" jdbcType="VARCHAR" property="contactAddress" />
+        <result column="bsmm_contactPhone" jdbcType="VARCHAR" property="contactPhone" />
+        <result column="bsmm_contactRelation" jdbcType="VARCHAR" property="contactRelation" />
+        <result column="bsmm_patientDoctor" jdbcType="VARCHAR" property="patientDoctor" />
+        <result column="bsmm_clinicServiceType" jdbcType="VARCHAR" property="clinicServiceType" />
+        <result column="bsmm_isSecret" jdbcType="VARCHAR" property="isSecret" />
+    </resultMap>
+    <sql id="Base_Column_List">
+		id,
+        bsmm_patientName,
+        bsmm_patientSex,bsmm_patientAge,
+        bsmm_patientAddress,
+        bsmm_patientPhone,
+        bsmm_contactName,
+        bsmm_contactAddress,
+        bsmm_contactPhone,
+        bsmm_patientDoctor,
+        bsmm_clinicServiceType,
+        bsmm_isSecret
+	</sql>
+    <select id="getAllPatient"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from bsmm_patient
+    </select>
+    <select id="getPatientById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from bsmm_patient b
+        where  b.id=#{id,jdbcType=VARCHAR}
+    </select>
+    <update id="updateById" parameterType="com.tigger.serviceprovder.model.pojo.Patient">
+        update bsmm_patient
+        <set>
+            <if test="patientName != null">
+               bsmm_patientName = #{patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="patientSex != null">
+               bsmm_patientSex = #{patientSex,jdbcType=VARCHAR},
+            </if>
+            <if test="patientAge != null">
+               bsmm_patientAge = #{patientAge,jdbcType=VARCHAR},
+            </if>
+            <if test="patientAddress != null">
+               bsmm_patientAddress = #{patientAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="patientPhone != null">
+               bsmm_patientPhone = #{patientPhone,jdbcType=NUMERIC},
+            </if>
+            <if test="contactName != null">
+               bsmm_contactName = #{contactName,jdbcType=NUMERIC},
+            </if>
+            <if test="contactAddress != null">
+               bsmm_contactAddress = #{contactAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null">
+               bsmm_contactPhone = #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactRelation != null">
+               bsmm_contactRelation = #{contactRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="patientDoctor != null">
+               bsmm_patientDoctor = #{patientDoctor,jdbcType=VARCHAR},
+            </if>
+            <if test="clinicServiceType != null">
+               bsmm_clinicServiceType = #{clinicServiceType,jdbcType=CHAR},
+            </if>
+            <if test="isSecret != null">
+               bsmm_isSecret = #{isSecret,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <delete  id="deleteById" parameterType="java.lang.String" >
+        delete from bsmm_patient where id=#{id}
+    </delete>
+</mapper>
